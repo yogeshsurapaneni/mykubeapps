@@ -23,7 +23,7 @@ spec:
             - mountPath: /init-transmission
               name: init-files-transmission
             - mountPath: /transmission-config
-              name: mediaserver-volume
+              name: mykubeapps-volume
               subPath: "config/transmission"
           securityContext:
             runAsUser: {{ .Values.general.puid }}
@@ -45,14 +45,14 @@ spec:
               containerPort: {{ .Values.transmission.container.port }}
               protocol: TCP
           volumeMounts:
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
               mountPath: "/config"
               subPath: "config/transmission"
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
               mountPath: "/downloads"
-              subPath: "downloads/transmission"
+              subPath: "Downloads/Complete"
       volumes:
-        - name: mediaserver-volume
+        - name: mykubeapps-volume
           persistentVolumeClaim:
             claimName: {{ .Values.general.storage.pvcName }}
         - name: init-files-transmission

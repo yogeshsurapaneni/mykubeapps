@@ -16,7 +16,7 @@ spec:
         app: plex
     spec:
       volumes:
-        - name: mediaserver-volume
+        - name: mykubeapps-volume
           persistentVolumeClaim:
             claimName: {{ .Values.general.storage.pvcName }}
       containers:
@@ -36,15 +36,15 @@ spec:
               containerPort: {{ .Values.plex.container.port }}
               protocol: TCP
           volumeMounts:
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
               mountPath: "/config"
               subPath: "config/plex"
-            - name: mediaserver-volume
-              mountPath: "/movies"
-              subPath: "media/movies"
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
+              mountPath: "Media/Movies"
+              subPath: "/Movies"
+            - name: mykubeapps-volume
               mountPath: "/tv"
-              subPath: "media/tv"
+              subPath: "Media/TV"
       {{- with .Values.general.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

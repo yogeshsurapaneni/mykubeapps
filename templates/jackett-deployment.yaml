@@ -23,7 +23,7 @@ spec:
             - mountPath: /init-jackett
               name: init-files-jackett
             - mountPath: /jackett-config
-              name: mediaserver-volume
+              name: mykubeapps-volume
               subPath: "config/jackett/Jackett"
           securityContext:
             runAsUser: {{ .Values.general.puid }}
@@ -45,11 +45,11 @@ spec:
               containerPort: {{ .Values.jackett.container.port }}
               protocol: TCP
           volumeMounts:
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
               mountPath: "/config"
               subPath: "config/jackett"
       volumes:
-        - name: mediaserver-volume
+        - name: mykubeapps-volume
           persistentVolumeClaim:
             claimName: {{ .Values.general.storage.pvcName }}
         - name: init-files-jackett

@@ -23,7 +23,7 @@ spec:
             - mountPath: /init-radarr
               name: init-files-radarr
             - mountPath: /radarr-config
-              name: mediaserver-volume
+              name: mykubeapps-volume
               subPath: "config/radarr"
           securityContext:
             runAsUser: {{ .Values.general.puid }}
@@ -45,17 +45,17 @@ spec:
               containerPort: {{ .Values.radarr.container.port }}
               protocol: TCP
           volumeMounts:
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
               mountPath: "/config"
               subPath: "config/radarr"
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
               mountPath: "/downloads"
-              subPath: "downloads/transmission"
-            - name: mediaserver-volume
+              subPath: "Downloads/Complete"
+            - name: mykubeapps-volume
               mountPath: "/movies"
-              subPath: "media/movies"
+              subPath: "Media/Movies"
       volumes:
-        - name: mediaserver-volume
+        - name: mykubeapps-volume
           persistentVolumeClaim:
             claimName: {{ .Values.general.storage.pvcName }}
         - name: init-files-radarr

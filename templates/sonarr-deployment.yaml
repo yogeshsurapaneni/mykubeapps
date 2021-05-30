@@ -23,7 +23,7 @@ spec:
             - mountPath: /init-sonarr
               name: init-files-sonarr
             - mountPath: /sonarr-config
-              name: mediaserver-volume
+              name: mykubeapps-volume
               subPath: "config/sonarr"
           securityContext:
             runAsUser: {{ .Values.general.puid }}
@@ -45,17 +45,17 @@ spec:
               containerPort: {{ .Values.sonarr.container.port }}
               protocol: TCP
           volumeMounts:
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
               mountPath: "/config"
               subPath: "config/sonarr"
-            - name: mediaserver-volume
+            - name: mykubeapps-volume
               mountPath: "/downloads"
-              subPath: "downloads/transmission"
+              subPath: "Downloads/Complete"
             - name: mediaserver-volume
               mountPath: "/tv"
-              subPath: "media/tv"
+              subPath: "Media/TV"
       volumes:
-        - name: mediaserver-volume
+        - name: mykubeapps-volume
           persistentVolumeClaim:
             claimName: {{ .Values.general.storage.pvcName }}
         - name: init-files-sonarr
